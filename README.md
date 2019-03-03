@@ -29,3 +29,6 @@ Some Images for testing has been provided in the Folder
 
 ### Tips
 1. kindly move the traineddata file for your country out of the tessdata
+
+### India 
+OpenALPR requisite files for India
