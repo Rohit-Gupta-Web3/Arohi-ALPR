@@ -15,7 +15,7 @@ sudo chmod 777 setup.sh
 
 ### To execute
 ```
-python3 logic.cypython-36.pyc
+python3 logic.cpython-36.pyc
 
 ```
 
