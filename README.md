@@ -23,3 +23,9 @@ python3 logic.cpython-36.pyc
 ```
 sqlitebrowser Aarohi.db
 ```
+
+### Images Folder
+Some Images for testing has been provided in the Folder
+
+### Tips
+1. kindly move the traineddata file for your country out of the tessdata
