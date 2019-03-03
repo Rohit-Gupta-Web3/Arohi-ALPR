@@ -7,9 +7,14 @@ This is a application build using OpenALPR and Python
 3. Tkinter
 4. SQLite3
 
-### How to execute
+### Install all the dependencies
 ```
 sudo chmod 777 setup.sh
+./setup.sh
+```
+
+### To execute
+```
 python3 logic.cypython-36.pyc
 
 ```
