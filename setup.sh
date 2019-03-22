@@ -23,9 +23,9 @@ OPENCV_VERSION='4.0'
 # 1. KEEP UBUNTU OR DEBIAN UP TO DATE
 
 sudo apt-get -y update
- sudo apt-get -y upgrade       # Uncomment this line to install the newest versions of all packages currently installed
- sudo apt-get -y dist-upgrade  # Uncomment this line to, in addition to 'upgrade', handles changing dependencies with new versions of packages
- sudo apt-get -y autoremove    # Uncomment this line to remove packages that are now no longer needed
+ sudo apt-get -y upgrade       
+ sudo apt-get -y dist-upgrade  
+ sudo apt-get -y autoremove    
 
 
 # 2. INSTALL THE DEPENDENCIES
@@ -66,4 +66,3 @@ cmake -DWITH_QT=ON -DWITH_OPENGL=ON -DFORCE_VTK=ON -DWITH_TBB=ON -DWITH_GDAL=ON 
 make -j4
 sudo make install
 sudo ldconfig
-s
