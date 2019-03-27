@@ -1,10 +1,12 @@
 #!/bin/usr/env python3
 from tkinter import *
-import tkinter.filedialog as filedialog, os, subprocess as sub, sqlite3, locale, shutil,time
+import tkinter.filedialog as filedialog, os, subprocess as sub, sqlite3, locale, shutil,time, tkinter.messagebox
 from datetime import datetime
 locale.setlocale(locale.LC_ALL, 'C')
+count=0
 
 def folder_move(buss,dev):
+		global count
 		c=sqlite3.connect("Aarohi.db")
 		cu = c.cursor()
 		cu.execute("SELECT ccode FROM Bussiness WHERE bid=?", (buss,)) 
@@ -22,10 +24,12 @@ def folder_move(buss,dev):
 		if len(onlyfiles)==0:
 			time.sleep(10)
 			response = os.system("ping -c 1 " + cip)
-			if response >5:
+			count=count+1
+			if count >2:
 				print("No files to process")
 				time.sleep(1)
 				tkinter.messagebox.showerror('Camera is not replying!')
+				count=0
 		i = 0
 		while i < len(onlyfiles):
 			os.chdir(input_folder)
@@ -53,9 +57,11 @@ def folder_move(buss,dev):
 			i += 1
 
 if __name__=="__main__":
-	buss="rohit"
+	#buss="rohit"
 	c=sqlite3.connect("Aarohi.db")
 	cu = c.cursor()
+	cu.execute("SELECT * FROM Bussiness ORDER BY bid ASC LIMIT 1")
+	buss=str(cu.fetchall()[0][0]).rstrip('\n')
 	cu.execute("SELECT bid FROM Bussiness WHERE bid=?", (buss,)) 
 	bid=str(cu.fetchall()[0][0]).rstrip('\n')
 	cu.execute("SELECT Did FROM device WHERE bid=?", (buss,)) 
