@@ -14,6 +14,7 @@ sudo chmod 777 run.sh
 ```
 
 ### To execute
+3 diifferent ways of executing
 ```
 1. click on the desktop icon
 2. grep '^Exec' Aarohi.desktop | tail -1 | sed 's/^Exec=//' | sed 's/%.//' | sed 's/^"//g' | sed 's/" *$//g'` &
