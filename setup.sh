@@ -15,6 +15,9 @@ sudo apt install sqlite3 sqlitebrowser -y
 #Python Dependencies
 sudo pip3 install DateTime subprocess.run
 
+#GNOME Desktop
+sudo apt-get install --no-install-recommends gnome-panel
+
 # VERSION TO BE INSTALLED
 
 OPENCV_VERSION='4.0'
