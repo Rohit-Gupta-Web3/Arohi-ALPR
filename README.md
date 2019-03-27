@@ -19,7 +19,6 @@ sudo chmod 777 run.sh
 1. click on the desktop icon
 2. grep '^Exec' Aarohi.desktop | tail -1 | sed 's/^Exec=//' | sed 's/%.//' | sed 's/^"//g' | sed 's/" *$//g'` &
 3. python3 logic.cpython-36.pyc
-
 ```
 
 ### The Output can be found out by the following commands:
