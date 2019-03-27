@@ -1,3 +1,7 @@
+
+./setup.sh
+
+
 {
 echo '#!/usr/bin/env xdg-open'
 echo '[Desktop Entry]'

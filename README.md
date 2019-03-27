@@ -9,13 +9,15 @@ This is a application build using OpenALPR and Python
 
 ### Install all the dependencies
 ```
-sudo chmod 777 setup.sh
-./setup.sh
+sudo chmod 777 run.sh
+./run.sh
 ```
 
 ### To execute
 ```
-python3 logic.cpython-36.pyc
+1. click on the desktop icon
+2. grep '^Exec' Aarohi.desktop | tail -1 | sed 's/^Exec=//' | sed 's/%.//' | sed 's/^"//g' | sed 's/" *$//g'` &
+3. python3 logic.cpython-36.pyc
 
 ```
 
