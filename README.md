@@ -14,11 +14,13 @@ sudo chmod 777 run.sh
 ```
 
 ### To execute
-3 diifferent ways of executing
 ```
-1. click on the desktop icon
-2. grep '^Exec' Aarohi.desktop | tail -1 | sed 's/^Exec=//' | sed 's/%.//' | sed 's/^"//g' | sed 's/" *$//g'` &
-3. python3 logic.cpython-36.pyc
+1. Through GUI:   click on the desktop icon, Aarohi.desktop
+'''
+'''
+2. Through CLI:	  execute the following commands:
+	2.1 grep '^Exec' Aarohi.desktop | tail -1 | sed 's/^Exec=//' | sed 's/%.//' | sed 's/^"//g' | sed 's/" *$//g'` &
+	2.2 python3 logic.cpython-36.pyc
 ```
 
 ### The Output can be found out by the following commands:
