@@ -1,0 +1,11 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Version=1.0
+Icon[en_IN]=gnome-panel-launcher
+Name[en_IN]=Aarohi Impex
+Type=Application
+Terminal=true
+Exec=/home/pi/Desktop/Arohi-ALPR/executable/exec.sh
+Name=Aarohi Impex
+Icon=gnome-panel-launcher
+StartupNotify=true
