@@ -6,11 +6,14 @@
 echo '#!/usr/bin/env xdg-open'
 echo '[Desktop Entry]'
 echo 'Version=1.0'
+echo 'Icon[en_IN]=gnome-panel-launcher'
+echo 'Name[en_IN]=Aarohi'
 echo 'Type=Application'
-echo 'Terminal=false'
+echo 'Terminal=true'
 echo 'Exec=python3 login.cpython-36.pyc'
 echo 'Name=Aarohi Impex'
-echo 'Icon=.'
+echo 'Icon=gnome-panel-launcher'
+echo 'StartupNotify=true'
 } > Aarohi.desktop
 
 
