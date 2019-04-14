@@ -57,7 +57,6 @@ def folder_move(buss,dev):
 			i += 1
 
 if __name__=="__main__":
-	#buss="rohit"
 	c=sqlite3.connect("Aarohi.db")
 	cu = c.cursor()
 	cu.execute("SELECT * FROM Bussiness ORDER BY bid ASC LIMIT 1")
