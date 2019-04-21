@@ -1,7 +1,6 @@
 #!/bin/usr/env python3
 from tkinter import *
 import tkinter.filedialog as filedialog, os, subprocess as sub, sqlite3, locale, shutil,time, tkinter.messagebox
-from datetime import datetime
 locale.setlocale(locale.LC_ALL, 'C')
 count=0
 
