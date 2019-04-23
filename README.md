@@ -36,3 +36,6 @@ Some Images for testing has been provided in the Folder
 
 ### India 
 OpenALPR requisite files for India
+
+###Github Pages
+Github Pages Version can be viewed on https://rohit-gupta-iic.github.io/Arohi-ALPR/
