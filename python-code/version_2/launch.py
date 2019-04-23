@@ -41,8 +41,8 @@ def folder_move(buss,dev):
 			a=0
 			while a< len(output):
 				if output[a] == "license":
-					only=input_folder+onlyfiles[i]
-					p1 = sub.Popen(['python3','plate_recognition.py', only], stdout=sub.PIPE)
+					only=onlyfiles[i]
+					p1 = sub.Popen(['python3','/home/rohit/Arohi-ALPR/python-code/version_2/__pycache__/plate_recognition.cpython-36.pyc', only], stdout=sub.PIPE)
 					result = p1.communicate()[0]
 					result=result.decode('utf-8')
 					result=result.split()
@@ -55,8 +55,8 @@ def folder_move(buss,dev):
 								shutil.move(old_nm,unprocessed_folder)
 						elif result[a] == "\"results\":":
 								print(buss, dev, result[15], result[17])
-								protime=datetime.datetime.now().time()-intime
-								c.execute("insert into alpr values (?,?,?,?,?,?) ", (buss, dev, intime, protime, str(output[19]), str(output[21])))
+								#protime=datetime.datetime.now().time()-intime
+								c.execute("insert into alpr values (?,?,?,?,?,?) ", (buss, dev, intime, 'NULL', str(output[19]), str(output[21])))
 								c.commit()
 								new_nm=processed_folder+(str(output[19])+".jpg")
 								shutil.move(old_nm,new_nm)
