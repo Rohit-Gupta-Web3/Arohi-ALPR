@@ -33,45 +33,29 @@ def folder_move(buss,dev):
 		while i < len(onlyfiles):
 			os.chdir(input_folder)
 			intime=time.ctime(os.path.getctime(onlyfiles[i]))
-			p1 = sub.Popen(['alpr', '-c',c_code,'--clock', onlyfiles[i]], stdout=sub.PIPE)
-			output = p1.communicate()[0]
-			old_nm=input_folder+str(onlyfiles[i])
-			output=str(output.decode('utf-8'))
-			output=output.split()
-			a=0
-			while a< len(output):
-				if output[a] == "license":
-					only=input_folder+onlyfiles[i]
-					p1 = sub.Popen(['python3','/home/rohit/Arohi-ALPR/python-code/version_2/__pycache__/plate_recognition.cpython-36.pyc', only], stdout=sub.PIPE)
-					result = p1.communicate()[0]
-					result=result.decode('utf-8')
-					result=result.split()
-					b=0
-					while b< len(result):
-						if result[b] == "\"error\":":
-							print("file not processed")
-							print("PlateRecognizer");
-							c.execute("insert into unprocessed values (?,?,?,?,?) ", (buss, dev, onlyfiles[i], intime, str(result)))		
-							c.commit()
-							shutil.move(old_nm,unprocessed_folder)
-						elif result[b] == "\"results\":":
-							print(buss, dev, result[19], result[21])
-							print("PlateRecognizer");
-							#protime=datetime.datetime.now().time()-intime
-							c.execute("insert into alpr values (?,?,?,?,?,?) ", (buss, dev, intime, 'NULL', str(result[19]), str(result[21])))
-							c.commit()
-							new_nm=processed_folder+(str(result[19])+".jpg")
-							shutil.move(old_nm,new_nm)
-						b=b+1
-				elif output[a] == "results":
-					print(buss, dev, output[15], output[17])
-					c.execute("insert into alpr values (?,?,?,?,?,?) ", (buss, dev, intime, str(output[5]), str(output[15]), str(output[17])))
-					c.commit()
-					new_nm=processed_folder+(str(output[15])+".jpg")
-					shutil.move(old_nm,new_nm)
-				a=a+1
+			only=input_folder+onlyfiles[i]
+			p1 = sub.Popen(['python3','/home/rohit/Arohi-ALPR/python-code/version_2/__pycache__/plate_recognition.cpython-36.pyc', only], stdout=sub.PIPE)
+			result = p1.communicate()[0]
+			result=result.decode('utf-8')
+			result=result.split()
+			b=0
+			while b< len(result):
+				if result[b] == "\"error\":":
+						print("file not processed")
+						c.execute("insert into unprocessed values (?,?,?,?,?) ", (buss, dev, onlyfiles[i], intime, str(result)))		
+						c.commit()
+						shutil.move(old_nm,unprocessed_folder)
+				elif result[b] == "\"results\":":
+						print(buss, dev, result[15], result[17])
+						#protime=datetime.datetime.now().time()-intime
+						c.execute("insert into alpr values (?,?,?,?,?,?) ", (buss, dev, intime, 'NULL', str(output[19]), str(output[21])))
+						c.commit()
+						new_nm=processed_folder+(str(output[19])+".jpg")
+						shutil.move(old_nm,new_nm)
+				b=b+1
 			os.chdir(pwd)
-			i += 1
+			i += 1		
+			
 
 if __name__=="__main__":
 	c=sqlite3.connect("Aarohi.db")
@@ -90,5 +74,6 @@ if __name__=="__main__":
 	while(1):
 		for k in d:
 			for a in k:
+				print(a)	
 				did=str(a)
 				folder_move(bid,did)
