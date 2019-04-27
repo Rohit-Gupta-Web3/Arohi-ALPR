@@ -1,6 +1,6 @@
 #!/bin/usr/env python3
 from tkinter import *
-import tkinter.filedialog as filedialog, os, subprocess as sub, sqlite3, locale, shutil,time, tkinter.messagebox
+import tkinter.filedialog as filedialog, os, subprocess as sub, sqlite3, locale, shutil,time, tkinter.messagebox, string, random
 locale.setlocale(locale.LC_ALL, 'C')
 count=0
 
@@ -54,25 +54,29 @@ def folder_move(buss,dev):
 							print("PlateRecognizer");
 							c.execute("insert into unprocessed values (?,?,?,?,?) ", (buss, dev, onlyfiles[i], intime, str(result)))		
 							c.commit()
-							shutil.move(old_nm,unprocessed_folder)
+							shutil.move(old_nm,unprocessed_folder+str(id_generator())+".jpg")
 						elif result[b] == "\"results\":":
 							print(buss, dev, result[3], result[21], result[23])
 							print("PlateRecognizer");
-							#protime=datetime.datetime.now().time()-intime
 							c.execute("insert into alpr values (?,?,?,?,?,?) ", (buss, dev, intime , str(result[3]), str(result[21]), str(result[23])))
 							c.commit()
-							new_nm=processed_folder+(str(result[19])+".jpg")
+							result[21]=str(result[21]).strip(",")
+							result[21]=str(result[21]).strip('\"')
+							new_nm=processed_folder+(str(result[21])+"_"+str(id_generator())+".jpg")
 							shutil.move(old_nm,new_nm)
 						b=b+1
 				elif output[a] == "results":
 					print(buss, dev, output[5], output[15], output[17])
 					c.execute("insert into alpr values (?,?,?,?,?,?) ", (buss, dev, intime, str(output[5]), str(output[15]), str(output[17])))
 					c.commit()
-					new_nm=processed_folder+(str(output[15])+".jpg")
+					new_nm=processed_folder+(str(output[15])+"_"+str(id_generator())+".jpg")
 					shutil.move(old_nm,new_nm)
 				a=a+1
 			os.chdir(pwd)
 			i += 1
+
+def id_generator(size=6, chars=string.ascii_uppercase + string.digits):
+	return ''.join(random.choice(chars) for _ in range(size))
 
 if __name__=="__main__":
 	c=sqlite3.connect("Aarohi.db")
