@@ -10,8 +10,8 @@ def folder_move(buss,dev):
 		cu = c.cursor()
 		cu.execute("SELECT ccode FROM Bussiness WHERE bid=?", (buss,)) 
 		c_code=str(cu.fetchall()[0][0]).rstrip('\n')
-		cu.execute("SELECT infol FROM Bussiness WHERE bid=?", (buss,)) 
-		input_folder=str(cu.fetchall()[0][0]).rstrip('\n')+"/"+dev+"/"
+		cu.execute("SELECT infol FROM Device WHERE did=?", (dev,)) 
+		input_folder=str(cu.fetchall()[0][0]).rstrip('\n')+"/"
 		cu.execute("SELECT pfol FROM Bussiness WHERE bid=?", (buss,)) 
 		processed_folder=str(cu.fetchall()[0][0]).rstrip('\n')+"/"
 		cu.execute("SELECT unfol FROM Bussiness WHERE bid=?", (buss,)) 
@@ -29,6 +29,7 @@ def folder_move(buss,dev):
 				time.sleep(1)
 				tkinter.messagebox.showerror('Camera is not replying!')
 				count=0
+				
 		i = 0
 		while i < len(onlyfiles):
 			os.chdir(input_folder)
@@ -55,16 +56,16 @@ def folder_move(buss,dev):
 							c.commit()
 							shutil.move(old_nm,unprocessed_folder)
 						elif result[b] == "\"results\":":
-							print(buss, dev, result[19], result[21])
+							print(buss, dev, result[3], result[21], result[23])
 							print("PlateRecognizer");
 							#protime=datetime.datetime.now().time()-intime
-							c.execute("insert into alpr values (?,?,?,?,?,?) ", (buss, dev, intime, 'NULL', str(result[19]), str(result[21])))
+							c.execute("insert into alpr values (?,?,?,?,?,?) ", (buss, dev, intime , str(result[3]), str(result[21]), str(result[23])))
 							c.commit()
 							new_nm=processed_folder+(str(result[19])+".jpg")
 							shutil.move(old_nm,new_nm)
 						b=b+1
 				elif output[a] == "results":
-					print(buss, dev, output[15], output[17])
+					print(buss, dev, output[5], output[15], output[17])
 					c.execute("insert into alpr values (?,?,?,?,?,?) ", (buss, dev, intime, str(output[5]), str(output[15]), str(output[17])))
 					c.commit()
 					new_nm=processed_folder+(str(output[15])+".jpg")

@@ -4,9 +4,8 @@ import tkinter.filedialog as filedialog, tkinter.messagebox,subprocess as sub, s
 
 master = Tk()
 master.title('Bussiness Setup')
-master.geometry('500x300')
+master.geometry('500x200')
 
-input_path = StringVar()
 processed_path = StringVar()
 unprocessed_path = StringVar()
 tkvar = StringVar()
@@ -31,11 +30,6 @@ OPTIONS = [
  'USA',
  'Thailand']
 
-def input_folder():
-	global inp,input_path
-	inp = filedialog.askdirectory()
-	input_path.set(inp)
-
 def processed_folder():
 	global pro,processed_path
 	pro = filedialog.askdirectory()
@@ -53,8 +47,6 @@ def insert_entry_fields():
 		tkinter.messagebox.showwarning('Warning', 'Bussiness ID not Eneterd')
 	elif c_code == OPTIONS[0]:
 		tkinter.messagebox.showwarning('Warning', 'Country Code not Eneterd')
-	elif len(inp) == 0:
-		tkinter.messagebox.showwarning('Warning', 'Input Folder Path not selected')
 	elif len(pro) == 0:
 		tkinter.messagebox.showwarning('Warning', 'Processed Folder Path not selected')
 	elif len(unpro) == 0:
@@ -62,8 +54,8 @@ def insert_entry_fields():
 	else:
 		c=sqlite3.connect("Aarohi.db")
 		c.execute('''CREATE TABLE if not exists Bussiness
-			(Bid text(15), ccode text(2), infol blob, pfol blob, unfol blob, primary key(Bid))''')
-		c.execute("insert into Bussiness values (?, ?, ?, ?, ?)",( buss, c_code, inp, pro, unpro))
+			(Bid text(15), ccode text(2), pfol blob, unfol blob, primary key(Bid))''')
+		c.execute("insert into Bussiness values (?, ?, ?, ?)",( buss, c_code, pro, unpro))
 		c.commit()
 		c.close()
 	window_quit(0)
@@ -100,7 +92,6 @@ def window_quit(x=1):
 
 def clear():
 	bid.delete(0, END)
-	input_path.set('')
 	processed_path.set('')
 	unprocessed_path.set('')
 	tkvar.set(OPTIONS[0])
@@ -109,25 +100,21 @@ def main_l():
 	global bid
 	Label(master, text=' Bussiness ID *').grid(row=0, sticky=N, pady=4)
 	Label(master, text=' Country *').grid(row=1, sticky=N, pady=4)
-	Label(master, text=' Input Folder *').grid(row=2, sticky=N, pady=4)
-	Label(master, text=' Processed Files *').grid(row=3, sticky=N, pady=4)
-	Label(master, text=' Unprocessed Files *').grid(row=4, sticky=N, pady=4)
+	Label(master, text=' Processed Files *').grid(row=2, sticky=N, pady=4)
+	Label(master, text=' Unprocessed Files *').grid(row=3, sticky=N, pady=4)
 
-	infol = Label(master, textvariable=input_path).grid(row=2, column=2, sticky=N, pady=4)
-	profol = Label(master, textvariable=processed_path).grid(row=3, column=2, sticky=N, pady=4)
-	unprofol = Label(master, textvariable=unprocessed_path).grid(row=4, column=2, sticky=N, pady=4)
+	profol = Label(master, textvariable=processed_path).grid(row=2, column=2, sticky=N, pady=4)
+	unprofol = Label(master, textvariable=unprocessed_path).grid(row=3, column=2, sticky=N, pady=4)
 
 	bid = Entry(master)
 	bid.grid(row=0, column=1, sticky=N, pady=4)
 	bid.insert(0, '')
-	inp = ''
 	pro = ''
 	unpro = ''
 	tkvar.set(OPTIONS[0])
 
-	Button(master, text='Browse', command=input_folder).grid(row=2, column=1, sticky=N, pady=4)
-	Button(master, text='Browse', command=processed_folder).grid(row=3, column=1, sticky=N, pady=4)
-	Button(master, text='Browse', command=unprocessed_folder).grid(row=4, column=1, sticky=N, pady=4)
+	Button(master, text='Browse', command=processed_folder).grid(row=2, column=1, sticky=N, pady=4)
+	Button(master, text='Browse', command=unprocessed_folder).grid(row=3, column=1, sticky=N, pady=4)
 	Button(master, text='Quit', command=window_quit).grid(row=5, column=0, sticky=N, pady=4)
 	Button(master, text='Submit', command=insert_entry_fields).grid(row=5, column=1, sticky=N, pady=4)
 	Button(master, text='Clear', command=clear).grid(row=5, column=2, sticky=N, pady=4)

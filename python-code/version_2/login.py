@@ -1,4 +1,4 @@
-#!/bin/usr/env python
+#!/bin/usr/env python3
 from tkinter import *
 import tkinter.filedialog as filedialog, tkinter.messagebox, os, subprocess as sub, sqlite3
 
