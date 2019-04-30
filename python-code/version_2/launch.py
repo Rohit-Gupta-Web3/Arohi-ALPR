@@ -52,16 +52,19 @@ def folder_move(buss,dev):
 						if result[b] == "\"error\":":
 							print("file not processed")
 							print("PlateRecognizer");
+							for j in result:
+								result=' '.join(str(result[j]))
 							c.execute("insert into unprocessed values (?,?,?,?,?) ", (buss, dev, onlyfiles[i], intime, str(result)))		
 							c.commit()
 							shutil.move(old_nm,unprocessed_folder+str(id_generator())+".jpg")
 						elif result[b] == "\"results\":":
-							print(buss, dev, result[3], result[21], result[23])
 							print("PlateRecognizer");
 							c.execute("insert into alpr values (?,?,?,?,?,?) ", (buss, dev, intime , str(result[3]), str(result[21]), str(result[23])))
 							c.commit()
 							result[21]=str(result[21]).strip(",")
 							result[21]=str(result[21]).strip('\"')
+							result[21]=str(result[21]).swapcase()
+							print(buss, dev, result[3], result[21], result[23])
 							new_nm=processed_folder+(str(result[21])+"_"+str(id_generator())+".jpg")
 							shutil.move(old_nm,new_nm)
 						b=b+1
