@@ -26,8 +26,13 @@ def folder_move(buss,dev):
 			count=count+1
 			if count == 2:
 				print("No files to process")
+				root1=Tk()
+				root1.geometry('200x100')
+				Label(root1, text="Camera is not replyig",fg='red',relief='solid').pack()
+				Button(root1,text="OK",command=root1.destroy).place(x=50,y=50)
+				root1.mainloop()
 				time.sleep(1)
-				tkinter.messagebox.showerror('Camera is not replying!')
+				#tkinter.messagebox.showerror('Camera is not replying!')
 				count=0
 				
 		i = 0
