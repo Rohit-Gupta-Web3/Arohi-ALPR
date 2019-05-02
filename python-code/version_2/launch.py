@@ -24,7 +24,7 @@ def folder_move(buss,dev):
 			time.sleep(10)
 			response = os.system("ping -c 1 " + cip)
 			count=count+1
-			if count >2:
+			if count == 2:
 				print("No files to process")
 				time.sleep(1)
 				tkinter.messagebox.showerror('Camera is not replying!')
