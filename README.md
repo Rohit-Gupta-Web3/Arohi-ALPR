@@ -9,6 +9,8 @@ This is a application build using OpenALPR and Python
 
 ### Install all the dependencies
 ```
+git clone https://github.com/Rohit-Gupta-IIC/Arohi-ALPR.git
+cd Arohi-ALPR
 sudo chmod 777 run.sh
 ./run.sh
 ```
